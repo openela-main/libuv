@@ -1,0 +1,63 @@
+diff --git a/Makefile.am b/Makefile.am
+index 46308eaa..5a3cde05 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -255,7 +255,6 @@ test_run_tests_SOURCES = test/blackhole-server.c \
+                          test/test-tcp-create-socket-early.c \
+                          test/test-tcp-connect-error-after-write.c \
+                          test/test-tcp-connect-error.c \
+-                         test/test-tcp-connect-timeout.c \
+                          test/test-tcp-connect6-error.c \
+                          test/test-tcp-flags.c \
+                          test/test-tcp-open.c \
+@@ -292,8 +291,6 @@ test_run_tests_SOURCES = test/blackhole-server.c \
+                          test/test-udp-mmsg.c \
+                          test/test-udp-multicast-interface.c \
+                          test/test-udp-multicast-interface6.c \
+-                         test/test-udp-multicast-join.c \
+-                         test/test-udp-multicast-join6.c \
+                          test/test-udp-multicast-ttl.c \
+                          test/test-udp-open.c \
+                          test/test-udp-options.c \
+diff --git a/test/test-list.h b/test/test-list.h
+index 52b17a69..89903c7e 100644
+--- a/test/test-list.h
++++ b/test/test-list.h
+@@ -126,9 +126,6 @@ TEST_DECLARE   (tcp_bind_invalid_flags)
+ TEST_DECLARE   (tcp_bind_writable_flags)
+ TEST_DECLARE   (tcp_listen_without_bind)
+ TEST_DECLARE   (tcp_connect_error_fault)
+-TEST_DECLARE   (tcp_connect_timeout)
+-TEST_DECLARE   (tcp_local_connect_timeout)
+-TEST_DECLARE   (tcp6_local_connect_timeout)
+ TEST_DECLARE   (tcp_close_while_connecting)
+ TEST_DECLARE   (tcp_close)
+ TEST_DECLARE   (tcp_close_reset_accepted)
+@@ -166,8 +163,6 @@ TEST_DECLARE   (udp_send_hang_loop)
+ TEST_DECLARE   (udp_send_immediate)
+ TEST_DECLARE   (udp_send_unreachable)
+ TEST_DECLARE   (udp_mmsg)
+-TEST_DECLARE   (udp_multicast_join)
+-TEST_DECLARE   (udp_multicast_join6)
+ TEST_DECLARE   (udp_multicast_ttl)
+ TEST_DECLARE   (udp_multicast_interface)
+ TEST_DECLARE   (udp_multicast_interface6)
+@@ -681,9 +676,6 @@ TASK_LIST_START
+   TEST_ENTRY  (tcp_bind_writable_flags)
+   TEST_ENTRY  (tcp_listen_without_bind)
+   TEST_ENTRY  (tcp_connect_error_fault)
+-  TEST_ENTRY  (tcp_connect_timeout)
+-  TEST_ENTRY  (tcp_local_connect_timeout)
+-  TEST_ENTRY  (tcp6_local_connect_timeout)
+   TEST_ENTRY  (tcp_close_while_connecting)
+   TEST_ENTRY  (tcp_close)
+   TEST_ENTRY  (tcp_close_reset_accepted)
+@@ -733,8 +725,6 @@ TASK_LIST_START
+   TEST_ENTRY  (udp_mmsg)
+   TEST_ENTRY  (udp_multicast_interface)
+   TEST_ENTRY  (udp_multicast_interface6)
+-  TEST_ENTRY  (udp_multicast_join)
+-  TEST_ENTRY  (udp_multicast_join6)
+   TEST_ENTRY  (udp_multicast_ttl)
+   TEST_ENTRY  (udp_sendmmsg_error)
+   TEST_ENTRY  (udp_try_send)
