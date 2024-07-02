@@ -6,7 +6,7 @@
 Name:           libuv
 Epoch:          1
 Version:        1.41.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        libuv is a multi-platform support library with a focus on asynchronous I/O.
 
 # the licensing breakdown is described in detail in the LICENSE file
@@ -17,14 +17,15 @@ Source2:        %{name}.pc.in
 Source3:        libuv.abignore
 
 BuildRequires:  autoconf automake libtool
-BuildRequires:  gcc
+BuildRequires:  gcc make
 
 %if %{with tests}
 # don't remove network tests
 %else
 # -- Patches -- #
-Patch1:         0001-Disable-failing-network-tests.patch
+Patch0001:      0001-Disable-failing-network-tests.patch
 %endif
+Patch0002:      0002-Fix-for-CVE-2024-24806.patch
 
 %description
 libuv is a multi-platform support library with a focus on asynchronous I/O
@@ -86,10 +87,14 @@ make check
 %{_libdir}/%{name}.a
 
 %changelog
+* Wed Jun 05 2024 Jan Staněk <jstanek@redhat.com> - 1:1.41.1-2
+- Backport fixes for CVE-2024-24806
+  Resolves: RHEL-24790
+
 * Mon Jul 12 2021 Zuzana Svetlikova <zsvetlik@redhat.com> - 1:1.41.1-1
 - Rebase to 1.41.1
 - Change description to reflect upstream
-- Resolves: RHBZ1980033
+- Resolves: RHBZ#1979927
 
 * Mon Jan 25 2021 Zuzana Svetlikova <zsvetlik@redhat.com> - 1:1.40.0-1
 - Rebase to 1.40.0

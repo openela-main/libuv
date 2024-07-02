@@ -1,8 +1,25 @@
+From a0ea40baa41a201bd3a4777a66c7eae41d2bcbc3 Mon Sep 17 00:00:00 2001
+From: rpm-build <rpm-build>
+Date: Wed, 5 Jun 2024 14:40:40 +0200
+Subject: [PATCH] Disable failing network tests
+
+Signed-off-by: rpm-build <rpm-build>
+---
+ Makefile.am      |  4 ----
+ test/test-list.h | 12 ------------
+ 2 files changed, 16 deletions(-)
+
 diff --git a/Makefile.am b/Makefile.am
-index 46308eaa..5a3cde05 100644
+index e8bab49..a190637 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -255,7 +255,6 @@ test_run_tests_SOURCES = test/blackhole-server.c \
+@@ -250,13 +250,11 @@ test_run_tests_SOURCES = test/blackhole-server.c \
+                          test/test-tcp-bind-error.c \
+                          test/test-tcp-bind6-error.c \
+                          test/test-tcp-close-accept.c \
+-                         test/test-tcp-close-while-connecting.c \
+                          test/test-tcp-close.c \
+                          test/test-tcp-close-reset.c \
                           test/test-tcp-create-socket-early.c \
                           test/test-tcp-connect-error-after-write.c \
                           test/test-tcp-connect-error.c \
@@ -10,7 +27,7 @@ index 46308eaa..5a3cde05 100644
                           test/test-tcp-connect6-error.c \
                           test/test-tcp-flags.c \
                           test/test-tcp-open.c \
-@@ -292,8 +291,6 @@ test_run_tests_SOURCES = test/blackhole-server.c \
+@@ -293,8 +291,6 @@ test_run_tests_SOURCES = test/blackhole-server.c \
                           test/test-udp-mmsg.c \
                           test/test-udp-multicast-interface.c \
                           test/test-udp-multicast-interface6.c \
@@ -20,20 +37,21 @@ index 46308eaa..5a3cde05 100644
                           test/test-udp-open.c \
                           test/test-udp-options.c \
 diff --git a/test/test-list.h b/test/test-list.h
-index 52b17a69..89903c7e 100644
+index 7458840..5545b2e 100644
 --- a/test/test-list.h
 +++ b/test/test-list.h
-@@ -126,9 +126,6 @@ TEST_DECLARE   (tcp_bind_invalid_flags)
+@@ -127,10 +127,6 @@ TEST_DECLARE   (tcp_bind_invalid_flags)
  TEST_DECLARE   (tcp_bind_writable_flags)
  TEST_DECLARE   (tcp_listen_without_bind)
  TEST_DECLARE   (tcp_connect_error_fault)
 -TEST_DECLARE   (tcp_connect_timeout)
 -TEST_DECLARE   (tcp_local_connect_timeout)
 -TEST_DECLARE   (tcp6_local_connect_timeout)
- TEST_DECLARE   (tcp_close_while_connecting)
+-TEST_DECLARE   (tcp_close_while_connecting)
  TEST_DECLARE   (tcp_close)
  TEST_DECLARE   (tcp_close_reset_accepted)
-@@ -166,8 +163,6 @@ TEST_DECLARE   (udp_send_hang_loop)
+ TEST_DECLARE   (tcp_close_reset_accepted_after_shutdown)
+@@ -167,8 +163,6 @@ TEST_DECLARE   (udp_send_hang_loop)
  TEST_DECLARE   (udp_send_immediate)
  TEST_DECLARE   (udp_send_unreachable)
  TEST_DECLARE   (udp_mmsg)
@@ -42,17 +60,18 @@ index 52b17a69..89903c7e 100644
  TEST_DECLARE   (udp_multicast_ttl)
  TEST_DECLARE   (udp_multicast_interface)
  TEST_DECLARE   (udp_multicast_interface6)
-@@ -681,9 +676,6 @@ TASK_LIST_START
+@@ -692,10 +686,6 @@ TASK_LIST_START
    TEST_ENTRY  (tcp_bind_writable_flags)
    TEST_ENTRY  (tcp_listen_without_bind)
    TEST_ENTRY  (tcp_connect_error_fault)
 -  TEST_ENTRY  (tcp_connect_timeout)
 -  TEST_ENTRY  (tcp_local_connect_timeout)
 -  TEST_ENTRY  (tcp6_local_connect_timeout)
-   TEST_ENTRY  (tcp_close_while_connecting)
+-  TEST_ENTRY  (tcp_close_while_connecting)
    TEST_ENTRY  (tcp_close)
    TEST_ENTRY  (tcp_close_reset_accepted)
-@@ -733,8 +725,6 @@ TASK_LIST_START
+   TEST_ENTRY  (tcp_close_reset_accepted_after_shutdown)
+@@ -744,8 +734,6 @@ TASK_LIST_START
    TEST_ENTRY  (udp_mmsg)
    TEST_ENTRY  (udp_multicast_interface)
    TEST_ENTRY  (udp_multicast_interface6)
@@ -61,3 +80,6 @@ index 52b17a69..89903c7e 100644
    TEST_ENTRY  (udp_multicast_ttl)
    TEST_ENTRY  (udp_sendmmsg_error)
    TEST_ENTRY  (udp_try_send)
+-- 
+2.45.1
+
