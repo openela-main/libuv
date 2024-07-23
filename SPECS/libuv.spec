@@ -6,7 +6,7 @@
 Name:           libuv
 Epoch:          1
 Version:        1.42.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Platform layer for node.js
 
 # the licensing breakdown is described in detail in the LICENSE file
@@ -17,10 +17,10 @@ Source2:        %{name}.pc.in
 Source3:        libuv.abignore
 
 BuildRequires:  autoconf automake libtool
-BuildRequires:  gcc
-BuildRequires: make
+BuildRequires:  gcc make
 
 # -- Patches -- #
+Patch0001:      0001-Fix-CVE-2024-24806.patch
 
 %description
 libuv is a new platform layer for Node. Its purpose is to abstract IOCP on
@@ -81,6 +81,10 @@ install -Dm0644 -t %{buildroot}%{_libdir}/libuv/ %{SOURCE3}
 %{_libdir}/%{name}.a
 
 %changelog
+* Wed Jun 05 2024 Jan Staněk <jstanek@redhat.com> - 1:1.42.0-2
+- Backport fix for CVE-2024-24806
+  Resolves: RHEL-24791
+
 * Fri Sep 17 2021 Zuzana Svetlikova <zsvetlik@redhat.com> - 1:1.42.0-1
 - Rebased, resolves CVE-2021-22918
 - Resolves: RHBZ#2005319, RHBZ#1979928
